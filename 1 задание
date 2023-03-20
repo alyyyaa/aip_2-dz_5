@@ -1,0 +1,71 @@
+'''
+Усовершенствовать игру «Камень, ножницы, бумага». Пользователь играет с
+компьютером и делает ход: 1 – Камень, 2 – Ножницы, 3 – Бумага. Компьютер делает
+ответный ход и объявляет победителя. Камень бьет ножницы, ножницы режут бумагу,
+бумага кроет камень. Основная программа должна состоять только из вызова одной
+единственной функции – mainMenu(). Функция mainMenu() должна выводить на экран
+меню пользователя и запрашивать число от 1 до 3. Внутри этой функции должна
+вызваться функция для проверки правильности ввода числа и функция, которая
+реализует сам алгоритм игры и определяет победителя (либо объявляет ничью). Таким
+образом, в программе должно быть 3 функции.
+'''
+
+import random
+
+def check_selection(action):
+    if action in range(1, 4):
+        return True
+    else:
+        return False
+
+def game():
+    player_action = int(input())
+
+    while check_selection(player_action) == False:
+        print('Данные не корректные, введите заново')
+        player_action = int(input())
+
+    if player_action == 1:
+        print('Ваш выбор - камень')
+    if player_action == 2:
+        print('Ваш выбор - ножницы')
+    if player_action == 3:
+        print('Ваш выбор - бумага')
+
+    computer_action = random.randint(1, 3)
+    if computer_action == 1:
+        print('Выбор компьютера - камень')
+    if computer_action == 2:
+        print('Выбор компьютера - ножницы')
+    if computer_action == 3:
+        print('Выбор компьютера - бумага')
+
+    if player_action == computer_action:
+        print('Ничья!')
+    elif (player_action == 1 and computer_action == 2) or (player_action == 2 and computer_action == 1):
+        print('Камень бьет ножницы')
+        if player_action == 1:
+            print('Вы победили!')
+        else:
+            print('Вы проиграли!')
+    elif (player_action == 1 and computer_action == 3) or (player_action == 3 and computer_action == 1):
+        print('Бумага кроет камень')
+        if player_action == 1:
+            print('Вы проиграли!')
+        else:
+            print('Вы выиграли!')
+    elif (player_action == 2 and computer_action == 3) or (player_action == 3 and computer_action == 2):
+        print('Ножницы режут бумагу')
+        if player_action == 2:
+            print('Вы победили!')
+        else:
+            print('Вы проиграли!')
+
+
+def mainMenu():
+    print('Перед Вами игра "Камень, ножницы, бумага"')
+    print('Выберите свой ход! 1 - камень, 2 - ножницы, 3 - бумага')
+    game()
+    print('Игра окончена!')
+
+mainMenu()
